@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kalkulator Mobile</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#2196F3">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+</head>
+<body>
+    <div class="mobile-container">
+        <!-- Header Mobile -->
+        <div class="mobile-header">
+            <div class="time-display" id="current-time">00:00</div>
+            <div class="battery-indicator">
+                <i class="fas fa-battery-three-quarters"></i>
+            </div>
+        </div>
+
+        <!-- Display Kalkulator -->
+        <div class="calculator-display">
+            <div class="calculation-history" id="calculation-history"></div>
+            <div class="current-input" id="current-input">0</div>
+        </div>
+
+        <!-- Tombol Kalkulator -->
+        <div class="calculator-buttons">
+            <div class="button-row">
+                <button class="btn btn-function" data-action="clear">C</button>
+                <button class="btn btn-function" data-action="toggle-sign">±</button>
+                <button class="btn btn-function" data-action="percentage">%</button>
+                <button class="btn btn-operator" data-action="divide">÷</button>
+            </div>
+            
+            <div class="button-row">
+                <button class="btn btn-number" data-number="7">7</button>
+                <button class="btn btn-number" data-number="8">8</button>
+                <button class="btn btn-number" data-number="9">9</button>
+                <button class="btn btn-operator" data-action="multiply">×</button>
+            </div>
+            
+            <div class="button-row">
+                <button class="btn btn-number" data-number="4">4</button>
+                <button class="btn btn-number" data-number="5">5</button>
+                <button class="btn btn-number" data-number="6">6</button>
+                <button class="btn btn-operator" data-action="subtract">-</button>
+            </div>
+            
+            <div class="button-row">
+                <button class="btn btn-number" data-number="1">1</button>
+                <button class="btn btn-number" data-number="2">2</button>
+                <button class="btn btn-number" data-number="3">3</button>
+                <button class="btn btn-operator" data-action="add">+</button>
+            </div>
+            
+            <div class="button-row">
+                <button class="btn btn-number btn-zero" data-number="0">0</button>
+                <button class="btn btn-number" data-number=".">.</button>
+                <button class="btn btn-equals" data-action="equals">=</button>
+            </div>
+        </div>
+
+        <!-- Navigation Bar Bawah -->
+        <div class="mobile-nav">
+            <button class="nav-btn active" id="nav-calc">
+                <i class="fas fa-calculator"></i>
+                <span>Kalkulator</span>
+            </button>
+            <button class="nav-btn" id="nav-history">
+                <i class="fas fa-history"></i>
+                <span>Riwayat</span>
+            </button>
+            <button class="nav-btn" id="nav-settings">
+                <i class="fas fa-cog"></i>
+                <span>Pengaturan</span>
+            </button>
+        </div>
+
+        <!-- Panel Riwayat (Hidden by default) -->
+        <div class="history-panel" id="history-panel">
+            <div class="panel-header">
+                <h3><i class="fas fa-history"></i> Riwayat Perhitungan</h3>
+                <button class="btn-close" id="close-history">&times;</button>
+            </div>
+            <div class="history-list" id="history-list">
+                <!-- History items will be added here -->
+            </div>
+            <button class="btn-clear-history" id="clear-history">
+                <i class="fas fa-trash"></i> Hapus Semua Riwayat
+            </button>
+        </div>
+
+        <!-- Panel Pengaturan (Hidden by default) -->
+        <div class="settings-panel" id="settings-panel">
+            <div class="panel-header">
+                <h3><i class="fas fa-cog"></i> Pengaturan</h3>
+                <button class="btn-close" id="close-settings">&times;</button>
+            </div>
+            <div class="settings-content">
+                <div class="setting-item">
+                    <span>Getar saat tekan tombol</span>
+                    <label class="switch">
+                        <input type="checkbox" id="vibration-toggle" checked>
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <span>Suara klik</span>
+                    <label class="switch">
+                        <input type="checkbox" id="sound-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <span>Tema Gelap</span>
+                    <label class="switch">
+                        <input type="checkbox" id="dark-mode-toggle">
+                        <span class="slider"></span>
+                    </label>
+                </div>
+                <div class="setting-item">
+                    <span>Format angka (1,000 vs 1.000)</span>
+                    <select id="number-format">
+                        <option value="indonesia">Indonesia (1.234,56)</option>
+                        <option value="international">Internasional (1,234.56)</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notification -->
+        <div class="toast" id="toast"></div>
+
+        <!-- Haptic Feedback (for vibration) -->
+        <div id="haptic-feedback"></div>
+    </div>
+
+    <audio id="click-sound" preload="auto">
+        <source src="https://assets.mixkit.co/sfx/preview/mixkit-select-click-1109.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
